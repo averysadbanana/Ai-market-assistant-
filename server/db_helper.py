@@ -49,13 +49,7 @@ class db:
     def removefromlist(self, p):  # remove items from collects
         cursor = self.conn.cursor()
         cursor.execute('delete from collects  where collects.product_name = ?', (p))
-	def getremainingitems(conn,i):
-		cursor=conn.cursor()
-		cursor.execute('select quantity from items where product_name = ? ',(i))
-		return [quantity[0] for quantity in cursor]
-	def addaddress(conn,a,i):
-		cursor=conn.cursor()
-		cursor.execute('update customer set address=? where contact_number =? ',(a,i))
+	
     def getprice(self, p):
         cursor = self.conn.cursor()
         cursor.execute("select price from items where product_name =? ", (p))
@@ -81,16 +75,17 @@ class db:
     def getcouriernumber(self,n):
 		cursor=self.conn.cursor()
 		cursor.execute('select phone_number from delivery_phone_number where delivery_id = (select delivery_id from delivery where delivery.first_name= ?)',(n))
+		
     def getremainingitems(self,i):
 		cursor=self.conn.cursor()
 		cursor.execute('select quantity from items where product_name = ? ',(i))
 		return [quantity[0] for quantity in cursor]
-    
-	def addaddress(self,a,i):
+	
+    def addaddress(self,a,i):
 		cursor=self.conn.cursor()
 		cursor.execute('update customer set address=? where contact_number =? ',(a,i))
-        
-	def getquantity(self,x):
+		
+    def getquantity(self,x):
 		cursor=self.conn.cursor()
 		cursor.execute('select quantity from items where product_name= ?',(x))
         
